@@ -28,7 +28,8 @@ fg = folium.FeatureGroup(name="My Map")
 
 for lt, ln, el, name in zip(volc_lat, volc_lon, elev, name):
     iframe = folium.IFrame(html=html % (name, name, el), width=200, height=100)
-    fg.add_child(folium.Marker(location=[lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color="green")))
+    fg.add_child(folium.CircleMarker(location=[lt, ln], radius=6, popup=folium.Popup(iframe),
+                                     fill_color=volc_colour(el), color="grey", fill_opacity=0.8))
 
 map.add_child(fg)
 map.save("Map1.html")
