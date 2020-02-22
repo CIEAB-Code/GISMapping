@@ -12,6 +12,14 @@ Volcano Information:<br>
 <a href="https://www.google.com/search?q=%%22%s%%22" target="_blank">%s</a><br>
 Height: %s m
 """
+def volc_colour(elevation):
+    if elevation <= 1500:
+        colour: str = "green"
+    elif elevation <= 2500:
+        colour: str = "orange"
+    elif elevation > 2500:
+        colour: str = "red"
+    return colour
 
 #map = folium.Map(location=[51.5007863, -0.1243937], zoom_start=10, tiles="Stamen Terrain")
 map = folium.Map(location=[37.422724,-114.3825967], zoom_start=6, tiles="Stamen Terrain")
