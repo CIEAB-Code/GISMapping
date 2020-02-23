@@ -3,4 +3,4 @@ Mapping features showcasing GIS programming such as displaying volcano locations
 
 Changes in next commit:
   1. Python path added.
-  2. Altered zoom value on start.
+  2. Add feature to show population size differences 
