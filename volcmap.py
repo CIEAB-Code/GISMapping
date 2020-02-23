@@ -24,16 +24,19 @@ def volc_colour(elevation):
 #map = folium.Map(location=[51.5007863, -0.1243937], zoom_start=10, tiles="Stamen Terrain")
 the_map = folium.Map(location=[37.422724,-114.3825967], zoom_start=6, tiles="Stamen Terrain")
 
-fg = folium.FeatureGroup(name="My Map")
+fgv = folium.FeatureGroup(name="Volcanoes")
 
 for lt, ln, el, name in zip(volc_lat, volc_lon, elev, name):
     iframe = folium.IFrame(html=html % (name, name, el), width=200, height=100)
-    fg.add_child(folium.Marker(location=[lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(volc_colour(el))))
+    fgv.add_child(folium.Marker(location=[lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(volc_colour(el))))
 
-fg.add_child(folium.GeoJson(data=open("worldpopulation.txt", "r", encoding='utf-8-sig').read(),
+fgp = folium.FeatureGroup(name="Population Size")
+
+fgp.add_child(folium.GeoJson(data=open("worldpopulation.txt", "r", encoding='utf-8-sig').read(),
              style_function=lambda x: {'fillColor': 'green' if x["properties"]["POP2005"] < 1000000
                                        else 'orange' if x["properties"]["POP2005"] <= 20000000 else 'red'}))
 
-the_map.add_child(fg)
+the_map.add_child(fgv)
+the_map.add_child(fgp)
 the_map.add_child(folium.LayerControl())
 the_map.save("Map1.html")
